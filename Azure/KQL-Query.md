@@ -31,16 +31,16 @@
 - and
   -  where condition1 and condition2  # equal to `where condition1 | where condition2`
 -  extend
-  - extend NewColumnName = sample
-  - extend NewColumnName = iff(ColumnName == "str", "yes", "no")  # iff works like `iff(condition, value_if_true, value_if_false)`
-  - extend NewColumnName = case(ColumnName == "str", "str", ColumnName == "int", "int", "other")
+    - extend NewColumnName = sample
+    - extend NewColumnName = iff(ColumnName == "str", "yes", "no")  # iff works like `iff(condition, value_if_true, value_if_false)`
+    - extend NewColumnName = case(ColumnName == "str", "str", ColumnName == "int", "int", "other")
 - parse_json
-  - tablename
-    | extend ParsedData = parse_json(JsonColumnName)
-    | extend SpecifiedField = ParsedData.FieldName
-    | summarize count() by tostring(SpecifiedField)  # KQL doesn't allow grouping by dynamic types
-  - tablename
-    | extend TargetData = parse_json(TargetResources)
-    | extend TargetItem = tostring(TargetData[0].targetitem)
+  - tablename <br>
+    | extend ParsedData = parse_json(JsonColumnName) <br>
+    | extend SpecifiedField = ParsedData.FieldName <br>
+    | summarize count() by tostring(SpecifiedField)  # KQL doesn't allow grouping by dynamic types <br>
+  - tablename <br>
+    | extend TargetData = parse_json(TargetResources) <br>
+    | extend TargetItem = tostring(TargetData[0].targetitem) <br>
 
     
